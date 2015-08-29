@@ -31,7 +31,7 @@ var stateText;
 var livingEnemies = [];
 
 function create() {
-
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  The scrolling starfield background
@@ -98,8 +98,23 @@ function create() {
     //  And some controls to play the game with
     cursors = game.input.keyboard.createCursorKeys();
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    game.input.onDown.add(gofull, this);
     
 }
+
+function gofull() {
+
+    if (game.scale.isFullScreen)
+    {
+        game.scale.stopFullScreen();
+    }
+    else
+    {
+        game.scale.startFullScreen(false);
+    }
+
+}
+
 
 function createAliens () {
 
@@ -157,6 +172,14 @@ function update() {
         {
             player.body.velocity.x = 200;
         }
+        else if (cursors.up.isDown)
+        {
+            player.body.velocity.y = -200;
+        }
+        else if (cursors.down.isDown)
+        {
+            player.body.velocity.y = 200;
+        }
 
         //  Firing?
         if (fireButton.isDown)
@@ -177,12 +200,14 @@ function update() {
 }
 
 function render() {
-
-    // for (var i = 0; i < aliens.length; i++)
-    // {
-    //     game.debug.body(aliens.children[i]);
-    // }
-
+    if (game.scale.isFullScreen)
+    {
+        game.debug.text('ESC to leave fullscreen', 270, 16);
+    }
+    else
+    {
+        game.debug.text('Click / Tap to go fullscreen', 270, 16);
+    }
 }
 
 function collisionHandler (bullet, alien) {

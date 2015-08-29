@@ -6,6 +6,9 @@ function preload() {
     game.load.image('bullet', 'assets/original/ectoplasm.png');
     game.load.image('enemyBullet', 'assets/enemy-bullet.png');
     game.load.spritesheet('invader', 'assets/invader32x32x4.png', 32, 32);
+    game.load.image('invader2', 'assets/original/saucer.png', 45, 44);
+    game.load.image('invader3', 'assets/original/saucer_b.png', 45, 44);
+
     game.load.spritesheet('ship', 'assets/original/ghostship.png', 33, 32);
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
     game.load.spritesheet('shield', 'assets/shield.png', 192, 192, 20);
@@ -371,7 +374,7 @@ function collisionHandler (enemy, bullet) {
         scoreText.text = scoreString + score;
 
         var explosion = explosions.getFirstExists(false);
-        explosion.reset(enemy.body.x, enemy.body.y);
+        explosion.reset(enemy.body.x + 20, enemy.body.y + 22);
         explosion.play('kaboom', 30, false, true);
     }
     // if (livingEnemies <= 0)

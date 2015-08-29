@@ -70,12 +70,29 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
   this.fireRate = 1000;
   this.nextFire = game.time.now + this.fireRate;
   this.fireChunk = 0;
+  // var ENEMY_TYPE_A = 'a';
+  // var ENEMY_TYPE_B_POS = 'b_pos';
+  // var ENEMY_TYPE_B_NEG = 'b_neg';
+  // var ENEMY_TYPE_C = 'c';
+  // var ENEMY_TYPE_BOSS_1 = 'boss1';
+  if(this.enemyType == ENEMY_TYPE_A) {
+     this.enObj = this.context.create(this.position.x, this.position.y, 'invader2');
 
-  this.enObj = this.context.create(this.position.x, this.position.y, 'invader');
+  } else if (this.enemyType == ENEMY_TYPE_B_POS || this.enemyType == ENEMY_TYPE_B_NEG) {
+    this.enObj = this.context.create(this.position.x, this.position.y, 'invader');
+    this.enObj.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
+    this.enObj.play('fly');
+ 
+  }else if (this.enemyType == ENEMY_TYPE_C) {
+    this.enObj = this.context.create(this.position.x, this.position.y, 'invader3');
+       
+  }else if (this.enemyType == ENEMY_TYPE_BOSS_1) {
+    this.enObj = this.context.create(this.position.x, this.position.y, 'invader');    
+  }
+  
+
   this.enObj.anchor.setTo(0.5, 0.5);
   // console.log(this.enObj);
-  this.enObj.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
-  this.enObj.play('fly');
   if (this.enemyType != ENEMY_TYPE_BOSS_1) {
     this.enObj.body.moves = true;
   } else {

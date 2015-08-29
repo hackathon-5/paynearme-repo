@@ -86,6 +86,7 @@ function Enemy() {
   };
   this.context = null;
   this.enObj = null;
+  this.dead = false;
   // this.tween = null;
 }
 // Enemy A: moves straight down shoots at player
@@ -156,7 +157,7 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
 
 Enemy.prototype.update = function () {
   // console.log("hi");
-  if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
+  if (game.time.now > this.nextFire && this.bullets.countDead() > 0 && !this.dead)
     {
       this.nextFire = game.time.now + this.fireRate;
 
@@ -167,13 +168,8 @@ Enemy.prototype.update = function () {
       // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
       game.physics.arcade.moveToObject(bullet,player,120);
     }
-}
+};
 
-Enemy.prototype.enemyFires = function() {
-  //  Grab the first bullet we can from the pool
-  console.log('hi');
-  // enemyBullet = enemyBullets.getFirstExists(false);
-
-  // enemyBullet.reset(this.body.x, this.body.y);
-  // game.physics.arcade.moveToObject(enemyBullet,player,120);
-}
+Enemy.prototype.stopFiring = function() {
+  this.dead = true;
+};

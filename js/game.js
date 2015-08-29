@@ -214,12 +214,12 @@ function update() {
         // }
 
         //  Run collision
-        // game.physics.arcade.overlap(bullets, aliens, collisionHandler, null, this);
-        // game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
+        // game.physics.arcade.overlap(bullets, enemies, collisionHandler, null, this);
+        game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
         _.each(enemies, function (enemy) {
+            game.physics.arcade.overlap(bullets, enemy.enObj, collisionHandler, null, enemy);
             enemy.update();
         });
-
     }
 
 }
@@ -235,11 +235,12 @@ function render() {
     }
 }
 
-function collisionHandler (bullet, alien) {
+function collisionHandler (bullet, enemy) {
 
     //  When a bullet hits an alien we kill them both
     bullet.kill();
-    alien.kill();
+    this.stopFiring();
+    enemy.kill();
 
     //  Increase the score
     score += 20;
@@ -247,21 +248,21 @@ function collisionHandler (bullet, alien) {
 
     //  And create an explosion :)
     var explosion = explosions.getFirstExists(false);
-    explosion.reset(alien.body.x, alien.body.y);
+    explosion.reset(enemy.body.x, enemy.body.y);
     explosion.play('kaboom', 30, false, true);
 
-    if (aliens.countLiving() == 0)
-    {
-        score += 1000;
-        scoreText.text = scoreString + score;
+    // if (enemies.countLiving() == 0)
+    // {
+    //     score += 1000;
+    //     scoreText.text = scoreString + score;
 
-        enemyBullets.callAll('kill',this);
-        stateText.text = " You Won, \n Click to restart";
-        stateText.visible = true;
+    //     enemyBullets.callAll('kill',this);
+    //     stateText.text = " You Won, \n Click to restart";
+    //     stateText.visible = true;
 
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
-    }
+    //     //the "click to restart" handler
+    //     game.input.onTap.addOnce(restart,this);
+    // }
 
 }
 

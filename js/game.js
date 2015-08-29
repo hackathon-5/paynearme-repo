@@ -38,6 +38,7 @@ var pad;
 var buttonA;
 var stick;
 var waveManager;
+var enemies = [];
 
 function create() {
     game.world.setBounds(0, 0, 600, 780)
@@ -104,6 +105,26 @@ function create() {
     explosions = game.add.group();
     explosions.createMultiple(30, 'kaboom');
     explosions.forEach(setupInvader, this);
+
+    // // The enemy's bullets
+    // enemyBullets = game.add.group();
+    // enemyBullets.enableBody = true;
+    // enemyBullets.physicsBodyType = Phaser.Physics.ARCADE;
+    // enemyBullets.createMultiple(30, 'enemyBullet');
+    // enemyBullets.setAll('anchor.x', 0.5);
+    // enemyBullets.setAll('anchor.y', 1);
+    // enemyBullets.setAll('outOfBoundsKill', true);
+    // enemyBullets.setAll('checkWorldBounds', true);
+
+    enemyBullets = game.add.group();
+    enemyBullets.enableBody = true;
+    enemyBullets.physicsBodyType = Phaser.Physics.ARCADE;
+    enemyBullets.createMultiple(100, 'enemyBullet');
+    
+    enemyBullets.setAll('anchor.x', 0.5);
+    enemyBullets.setAll('anchor.y', 1);
+    enemyBullets.setAll('outOfBoundsKill', true);
+    enemyBullets.setAll('checkWorldBounds', true);
 
     //  And some controls to play the game with
     cursors = game.input.keyboard.createCursorKeys();
@@ -190,14 +211,18 @@ function update() {
             fireBullet();
         }
 
-        if (game.time.now > firingTimer)
-        {
-            waveManager.enemyFires();
-        }
+        // if (game.time.now > firingTimer)
+        // {
+        //     waveManager.enemyFires();
+        // }
 
         //  Run collision
         // game.physics.arcade.overlap(bullets, aliens, collisionHandler, null, this);
         // game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
+        // _.each(enemies, function (enemy) {
+        //     enemy.update();
+        // });
+
     }
 
 }

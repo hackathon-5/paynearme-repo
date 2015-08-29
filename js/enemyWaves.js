@@ -266,12 +266,84 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
+  // Wave 9 - first diagonals
+
   { spawnTimer: 55,
     enemyType: 'b_pos',
     xPosition: 100,
     yPosition: 0 },
 
-  { spawnTimer: 55,
+  { spawnTimer: 55.5,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 56,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 56.5,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 57,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 57.5,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 58,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 58.5,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 57,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 57.5,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 58,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 58.5,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 59,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 59.5,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 60,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 60.5,
     enemyType: 'b_neg',
     xPosition: 500,
     yPosition: 0 },

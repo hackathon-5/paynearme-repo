@@ -10,6 +10,12 @@ function preload() {
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
     game.load.image('starfield', 'assets/starfield.png');
     game.load.image('background', 'assets/background2.png');
+    game.load.atlas('arcade', 'assets/virtualjoystick/skins/generic-joystick.png', 'assets/virtualjoystick/skins/generic-joystick.json');
+    // game.load.image('background', 'assets/virtualjoystick/back.png');
+    // game.load.image('player', 'assets/virtualjoystick/ship.png');
+    // game.load.image('bullet2', 'assets/virtualjoystick/bullet2.png');
+    // game.load.image('bullet9', 'assets/virtualjoystick/bullet9.png');
+    // game.load.image('bullet10', 'assets/virtualjoystick/bullet10.png');
 
 }
 
@@ -29,8 +35,23 @@ var enemyBullet;
 var firingTimer = 0;
 var stateText;
 var livingEnemies = [];
+var pad;
+var buttonA;
+var stick;
 
 function create() {
+
+    pad = game.plugins.add(Phaser.VirtualJoystick);
+
+    stick = pad.addStick(80, 520, 100, 'arcade');
+    stick.deadZone = 0;
+    stick.scale = 0.5;
+
+    buttonA = pad.addButton(450, 520, 'arcade', 'button1-up', 'button1-down');
+    // buttonA.onDown.add(this.fireBullet, this);
+    buttonA.scale = 0.9;
+    buttonA.repeatRate = 100;
+    // buttonA.addKey(Phaser.Keyboard.CONTROL);
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
 

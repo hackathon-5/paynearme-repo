@@ -8,6 +8,7 @@ function preload() {
     game.load.spritesheet('invader', 'assets/invader32x32x4.png', 32, 32);
     game.load.image('ship', 'assets/player.png');
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
+    game.load.spritesheet('shield', 'assets/shield.png', 192, 192, 20);
     game.load.image('starfield', 'assets/starfield.png');
     game.load.image('background', 'assets/background2.png');
     game.load.atlas('arcade', 'assets/virtualjoystick/skins/generic-joystick.png', 'assets/virtualjoystick/skins/generic-joystick.json');
@@ -41,6 +42,7 @@ var stick;
 var waveManager;
 var enemies = [];
 var invincibility = false;
+var shield;
 
 function create() {
     game.world.setBounds(0, 0, 600, 780)
@@ -74,6 +76,7 @@ function create() {
 
     //  The hero!
     player = game.add.sprite(300, game.world.height - 20, 'ship');
+
     player.enableBody = true;
     player.anchor.setTo(0.5, 0.5);
     
@@ -190,6 +193,10 @@ function create() {
         );
     });
     waveManager.calculateTimers();
+
+    shield = game.add.sprite(player.body.x, player.body.y, 'shield');
+    var shields = shield.animations.add('shields');
+
 }
     //********************************************
     //********************************************
@@ -236,6 +243,11 @@ function update() {
 
     //  Scroll the background
     starfield.tilePosition.y += 2;
+    
+    // shield.animations.play('shields', 30, true);
+    // shield.position.x = player.body.x - 84;
+    // shield.position.y = player.body.y - 75;
+
 
     if (player.alive)
     {

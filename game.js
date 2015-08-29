@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(600, 900, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
 
@@ -40,14 +40,15 @@ var buttonA;
 var stick;
 
 function create() {
+    game.world.setBounds(0, 0, 600, 780)
     pad = game.plugins.add(Phaser.VirtualJoystick);
 
-    stick = pad.addStick(80, 520, 100, 'arcade');
+    stick = pad.addStick(80, game.stage.height - 65, 100, 'arcade');
     stick.deadZone = 0;
     stick.scale = 0.5;
 
-    buttonA = pad.addButton(450, 520, 'arcade', 'button1-up', 'button1-down');
-    // buttonA.onDown.add(this.fireBullet, this);
+    buttonA = pad.addButton(game.world.width - 70, game.stage.height - 65, 'arcade', 'button1-up', 'button1-down');
+    buttonA.onDown.add(fireBullet);
     buttonA.scale = 0.9;
     buttonA.repeatRate = 100;
     // buttonA.addKey(Phaser.Keyboard.CONTROL);
@@ -56,7 +57,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  The scrolling starfield background
-    starfield = game.add.tileSprite(0, 0, 800, 600, 'starfield');
+    starfield = game.add.tileSprite(0, 0, 800, 780, 'starfield');
 
     //  Our bullet group
     bullets = game.add.group();
@@ -79,9 +80,12 @@ function create() {
     enemyBullets.setAll('checkWorldBounds', true);
 
     //  The hero!
-    player = game.add.sprite(400, 500, 'ship');
+    player = game.add.sprite(400, game.world.height - 20, 'ship');
+    player.enableBody = true;
     player.anchor.setTo(0.5, 0.5);
+    
     game.physics.enable(player, Phaser.Physics.ARCADE);
+    player.body.collideWorldBounds = true;
 
     //  The baddies!
     aliens = game.add.group();
@@ -182,8 +186,20 @@ function update() {
 
     if (player.alive)
     {
+        
+
+        var maxSpeed = 200;
+
+        if (stick.isDown)
+        {
+            game.physics.arcade.velocityFromRotation(stick.rotation, stick.force * maxSpeed, player.body.velocity);
+        }
+        else
+        {
+            player.body.velocity.set(0);
+        }
+
         //  Reset the player, then check for movement keys
-        player.body.velocity.setTo(0, 0);
 
         if (cursors.left.isDown)
         {

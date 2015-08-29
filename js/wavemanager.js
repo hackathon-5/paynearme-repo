@@ -11,15 +11,11 @@ WaveManager.prototype.addWave = function(spawnTimeInSeconds, enemyType, spawnPos
 WaveManager.prototype.calculateTimers = function() {
   context = this;
   _.each(this.waves, function(wave) {
-    // console.log(wave);
     game.time.events.add(Phaser.Timer.SECOND * wave.spawnTimeInSeconds, context.spawnEnemey, wave);
   });
 };
 
 WaveManager.prototype.spawnEnemey = function() {
-  // console.log(wave);
-  console.log("hi");
-  console.log(this);
   var enemey = new Enemey();
   enemey.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType);
   // // The enemy's bullets
@@ -90,6 +86,16 @@ function Enemey() {
   this.enObj = null;
   // this.tween = null;
 }
+// Enemy A: moves straight down shoots at player
+// Enemy B_POS: Moves down and right, shoots at player
+// Enemy B_NEG: Moves down and left, shoots at player
+// Enemy Boss: tween left and right, stays anchored to top
+
+var ENEMY_TYPE_A = 'a';
+var ENEMY_TYPE_B_POS = 'b_pos';
+var ENEMY_TYPE_B_NEG = 'b_neg';
+var ENEMY_TYPE_BOSS = 'boss';
+
 
 Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
   this.enemyType = enemyType;
@@ -99,15 +105,29 @@ Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
   this.context.enableBody = true;
   this.context.physicsBodyType = Phaser.Physics.ARCADE;
 
-  this.enObj = this.context.create(this.position.x, this.position.y, this.enemyType);
+  this.enObj = this.context.create(this.position.x, this.position.y, 'invader');
   this.enObj.anchor.setTo(0.5, 0.5);
   // console.log(this.enObj);
   this.enObj.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
   this.enObj.play('fly');
-  this.enObj.body.moves = true;
+  if (this.enemyType != ENEMY_TYPE_BOSS) {
+    this.enObj.body.moves = true;
+  } else {
+    this.enObj.body.moves = true;
+  }
 
   // base this on enemy type
-  this.enObj.body.velocity.y = 200;
+  if(this.enemyType == ENEMY_TYPE_A) {
+    this.enObj.body.velocity.y = 100;
+  } else if (this.enemyType == ENEMY_TYPE_B_POS) {
+    this.enObj.body.velocity.x = 75;
+    this.enObj.body.velocity.y = 100;
+  } else if (this.enemyType == ENEMY_TYPE_B_NEG) {
+    this.enObj.body.velocity.x = -75;
+    this.enObj.body.velocity.y = 100;
+  } else if (this.enemyType == ENEMY_TYPE_BOSS) {
+    this.tween = game.add.tween(this.enObj).to( { x: 200 }, 1000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+  }
   // //  All this does is basically start the invaders moving. Notice we're moving the Group they belong to, rather than the invaders directly.
   // this.tween = game.add.tween(this.enObj).to( { y: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
   // this.tween.onLoop.add(this.descend, this);

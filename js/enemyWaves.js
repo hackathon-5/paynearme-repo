@@ -1,5 +1,5 @@
 var enemyWaves = [
-  // Wave 1 - 3 left row
+  // Wave 1 - 3 left row ##################################
   { spawnTimer: 1,
     enemyType: 'a',
     xPosition: 50,
@@ -15,7 +15,7 @@ var enemyWaves = [
     xPosition: 230,
     yPosition: 0 },
 
-  // Wave 2 - 3 right row
+  // Wave 2 - 3 right row #################################
   { spawnTimer: 5,
     enemyType: 'a',
     xPosition: 550,
@@ -31,7 +31,7 @@ var enemyWaves = [
     xPosition: 370,
     yPosition: 0 },
 
-  // Wave 3 - 4 left column
+  // Wave 3 - 4 left column ###############################
   { spawnTimer: 10,
     enemyType: 'a',
     xPosition: 100,
@@ -52,7 +52,7 @@ var enemyWaves = [
     xPosition: 100,
     yPosition: 0 },
 
-  // Wave 4 - 4 right column
+  // Wave 4 - 4 right column ##############################
   { spawnTimer: 12,
     enemyType: 'a',
     xPosition: 500,
@@ -73,7 +73,7 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-  // Wave 5 - 5 full row
+  // Wave 5 - 5 full row ##################################
   { spawnTimer: 18,
     enemyType: 'a',
     xPosition: 100,
@@ -99,7 +99,7 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-  // Wave 6 - Diamond
+  // Wave 6 - Diamond #####################################
   { spawnTimer: 23,
     enemyType: 'a',
     xPosition: 300,
@@ -180,7 +180,7 @@ var enemyWaves = [
     xPosition: 300,
     yPosition: 0 },
 
-  // Wave 8 - X
+  // Wave 8 - X ###########################################
   { spawnTimer: 40,
     enemyType: 'a',
     xPosition: 100,
@@ -266,7 +266,7 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-  // Wave 9 - first diagonals
+  // Wave 9 - first diagonals #############################
 
   { spawnTimer: 55,
     enemyType: 'b_pos',
@@ -348,7 +348,7 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-  // Wave 10 CCCCCCCCOMBO
+  // Wave 10 CCCCCCCCOMBO #################################
   { spawnTimer: 63,
     enemyType: 'a',
     xPosition: 150,
@@ -409,7 +409,7 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-  // Wave 11 - random preboss bullshit wave
+  // Wave 11 - random preboss bullshit wave ###############
   { spawnTimer: 70,
     enemyType: 'b_neg',
     xPosition: 300,
@@ -470,7 +470,73 @@ var enemyWaves = [
     xPosition: 400,
     yPosition: 0 },
 
+  { spawnTimer: 74,
+    enemyType: 'a',
+    xPosition: 200,
+    yPosition: 0 },
+
+  { spawnTimer: 74,
+    enemyType: 'a',
+    xPosition: 300,
+    yPosition: 0 },
+
+  { spawnTimer: 74,
+    enemyType: 'a',
+    xPosition: 400,
+    yPosition: 0 },
+
+  { spawnTimer: 75,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 75,
+    enemyType: 'b_pos',
+    xPosition: 200,
+    yPosition: 0 },
+
+  { spawnTimer: 75,
+    enemyType: 'b_pos',
+    xPosition: 300,
+    yPosition: 0 },
+
+  { spawnTimer: 75,
+    enemyType: 'b_pos',
+    xPosition: 400,
+    yPosition: 0 },
+
+  { spawnTimer: 75,
+    enemyType: 'b_pos',
+    xPosition: 500,
+    yPosition: 0 },
+
   { spawnTimer: 77,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+  { spawnTimer: 77,
+    enemyType: 'b_neg',
+    xPosition: 400,
+    yPosition: 0 },
+
+  { spawnTimer: 77,
+    enemyType: 'b_neg',
+    xPosition: 300,
+    yPosition: 0 },
+
+  { spawnTimer: 77,
+    enemyType: 'b_neg',
+    xPosition: 200,
+    yPosition: 0 },
+
+  { spawnTimer: 77,
+    enemyType: 'b_neg',
+    xPosition: 100,
+    yPosition: 0 },
+
+  // Wave 12 BOSS WAVE ####################################
+  { spawnTimer: 82,
     enemyType: 'boss1',
     xPosition: 300,
     yPosition: 0 },

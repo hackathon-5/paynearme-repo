@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(600, 900, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(600, 900, Phaser.AUTO, 'space-ghost', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
 
@@ -140,19 +140,13 @@ function create() {
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     // game.input.onDown.add(gofull, this);
 
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-
+    // Code for the fullscreen
+    var xyz = game.add.text( game.world.width - 400, 2, 'Click to fullscreen', { font: '24px Arial', fill: '#fff' });
+    xyz.inputEnabled = true;
+    xyz.events.onInputUp.add(function () {
+        gofull();
+            console.log("balls");
+        });
 
         /*
         Code for the pause menu
@@ -187,6 +181,7 @@ function create() {
         }
     };
 
+
     waveManager = new WaveManager();
     _.each(enemyWaves, function(wave) {
         waveManager.addWave(
@@ -201,25 +196,6 @@ function create() {
     var shields = shield.animations.add('shields');    
 
 }
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
-    //********************************************
 
 function gofull() {
 
@@ -335,14 +311,14 @@ function doPowerUp(powerup, player) {
 }
 
 function render() {
-    if (game.scale.isFullScreen)
-    {
-        game.debug.text('ESC to leave fullscreen', game.world.width / 2 - 120, 16);
-    }
-    else
-    {
-        game.debug.text('Click / Tap to go fullscreen', game.world.width / 2 - 120, 16);
-    }
+    // if (game.scale.isFullScreen)
+    // {
+    //     game.debug.text('ESC to leave fullscreen', game.world.width / 2 - 120, 16);
+    // }
+    // else
+    // {
+    //     game.debug.text('Click / Tap to go fullscreen', game.world.width / 2 - 120, 16);
+    // }
 }
 
 function collisionHandler (enemy, bullet) {
@@ -371,18 +347,18 @@ function collisionHandler (enemy, bullet) {
         explosion.reset(enemy.body.x, enemy.body.y);
         explosion.play('kaboom', 30, false, true);
     }
-    // if (livingEnemies <= 0)
-    // {
-    //     score += 1000;
-    //     scoreText.text = scoreString + score;
+    if (livingEnemies <= 0)
+    {
+        score += 1000;
+        scoreText.text = scoreString + score;
 
-    //     enemyBullets.callAll('kill',this);
-    //     stateText.text = " You Won, \n Refresh to \n restart";
-    //     stateText.visible = true;
+        enemyBullets.callAll('kill',this);
+        stateText.text = " You Won, \n Refresh to \n restart";
+        stateText.visible = true;
 
-    //     //the "click to restart" handler
-    //     game.input.onTap.addOnce(restart,this);
-    // }
+        //the "click to restart" handler
+        game.input.onTap.addOnce(restart,this);
+    }
 
 }
 function noInvincible () {

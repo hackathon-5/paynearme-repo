@@ -119,7 +119,7 @@ function create() {
     //  And some controls to play the game with
     cursors = game.input.keyboard.createCursorKeys();
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    game.input.onDown.add(gofull, this);
+    // game.input.onDown.add(gofull, this);
     
 }
 

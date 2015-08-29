@@ -16,9 +16,9 @@ WaveManager.prototype.calculateTimers = function() {
 };
 
 WaveManager.prototype.spawnEnemey = function() {
-  var enemey = new Enemey();
-  enemey.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType, enemyBullets);
-
+  var enemy = new Enemy();
+  enemy.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType, enemyBullets);
+  enemies.push(enemy);
   // // The enemy's bullets
   // enemyBullets = game.add.group();
   // enemyBullets.enableBody = true;
@@ -78,7 +78,7 @@ Wave.prototype.initialize = function(spawnTimeInSeconds, enemyType, spawnPosX, s
   this.spawnPos.y = spawnPosY;
 };
 
-function Enemey() {
+function Enemy() {
   this.enemyType = null;
   this.position = {
     x: 0,
@@ -99,7 +99,7 @@ var ENEMY_TYPE_B_NEG = 'b_neg';
 var ENEMY_TYPE_BOSS_1 = 'boss';
 
 
-Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) {
+Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) {
   this.enemyType = enemyType;
   this.position.x = spawnPosX;
   this.position.y = spawnPosY;
@@ -151,21 +151,22 @@ Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets)
   // timer.start();
   // console.log(this);
   // game.time.events.repeat(Phaser.Timer.SECOND * 1, this.enemyFires, this);
+  return this;
 };
 
 Enemy.prototype.update = function () {
-  console.log("hi");
-  if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
-    {
-      this.nextFire = game.time.now + this.fireRate;
+  // console.log("hi");
+  // if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
+  //   {
+  //     this.nextFire = game.time.now + this.fireRate;
 
-      var bullet = this.bullets.getFirstDead();
+  //     var bullet = this.bullets.getFirstDead();
 
-      bullet.reset(this.body.x, this.body.y);
+  //     bullet.reset(this.body.x, this.body.y);
 
-      // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
-      game.physics.arcade.moveToObject(bullet,player,120);
-    }
+  //     // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
+  //     game.physics.arcade.moveToObject(bullet,player,120);
+  //   }
 }
 
 Enemy.prototype.enemyFires = function() {

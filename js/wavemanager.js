@@ -121,10 +121,10 @@ Enemy.prototype.update = function () {
 
       var bullet = this.bullets.getFirstDead();
 
-      bullet.reset(this.enObj.body.x, this.enObj.body.y);
+      bullet.reset(this.enObj.body.x + 15, this.enObj.body.y + 40);
 
       // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
-      game.physics.arcade.moveToObject(bullet,player,120);
+      game.physics.arcade.moveToObject(bullet,player,200);
     }
 };
 

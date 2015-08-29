@@ -34,12 +34,13 @@ var lives;
 var enemyBullet;
 var firingTimer = 0;
 var stateText;
-var livingEnemies = [];
+var livingEnemies = 0;
 var pad;
 var buttonA;
 var stick;
 var waveManager;
 var enemies = [];
+var invincibility = false;
 
 function create() {
     game.world.setBounds(0, 0, 600, 780)
@@ -283,7 +284,9 @@ function update() {
 
         //  Run collision
         // game.physics.arcade.overlap(bullets, enemies, collisionHandler, null, this);
-        game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
+        if(!invincibility) {
+            game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
+        }
         _.each(enemies, function (enemy) {
             game.physics.arcade.overlap(bullets, enemy.enObj, collisionHandler, null, enemy);
             enemy.update();
@@ -310,6 +313,7 @@ function collisionHandler (enemy, bullet) {
     if(this.hp <= 0) {
 
         this.stopFiring();
+        livingEnemies -= 1;
         enemy.kill();
 
         score += 20;
@@ -319,20 +323,24 @@ function collisionHandler (enemy, bullet) {
         explosion.reset(enemy.body.x, enemy.body.y);
         explosion.play('kaboom', 30, false, true);
     }
+    console.log(livingEnemies);
+    if (livingEnemies <= 0)
+    {
+        score += 1000;
+        scoreText.text = scoreString + score;
 
-    // if (enemies.countLiving() == 0)
-    // {
-    //     score += 1000;
-    //     scoreText.text = scoreString + score;
+        enemyBullets.callAll('kill',this);
+        stateText.text = " You Won, \n Refresh to \n restart";
+        stateText.visible = true;
 
-    //     enemyBullets.callAll('kill',this);
-    //     stateText.text = " You Won, \n Click to restart";
-    //     stateText.visible = true;
+        //the "click to restart" handler
+        game.input.onTap.addOnce(restart,this);
+    }
 
-    //     //the "click to restart" handler
-    //     game.input.onTap.addOnce(restart,this);
-    // }
-
+}
+function noInvincible () {
+    invincibility = false;
+    player.alpha = 1;
 }
 
 function enemyHitsPlayer (player,bullet) {
@@ -344,6 +352,9 @@ function enemyHitsPlayer (player,bullet) {
     if (live)
     {
         live.kill();
+        invincibility = true;
+        player.alpha = 0.5;
+        game.time.events.add(Phaser.Timer.SECOND * 3, noInvincible, this);
     }
 
     //  And create an explosion :)
@@ -357,11 +368,11 @@ function enemyHitsPlayer (player,bullet) {
         player.kill();
         enemyBullets.callAll('kill');
 
-        stateText.text=" GAME OVER \n Click to restart";
+        stateText.text=" GAME OVER \n Refresh to \n restart";
         stateText.visible = true;
 
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
+        //the "Refresh to restarter
+        // game.input.onTap.addOnce(restart,this);
     }
 
 }
@@ -399,8 +410,8 @@ function restart () {
     //resets the life count
     lives.callAll('revive');
     //  And brings the aliens back from the dead :)
-    aliens.removeAll();
-    createAliens();
+    enemies.removeAll();
+    // createAliens();
 
     //revives the player
     player.revive();

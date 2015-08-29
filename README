@@ -1,3 +1,8 @@
+New
+$ bundle install
+$ ruby sinatra.rb
+
+Old
 $ npm install
 $ npm install serve -g
 $ serve

@@ -54,6 +54,7 @@ function Enemy() {
 var ENEMY_TYPE_A = 'a';
 var ENEMY_TYPE_B_POS = 'b_pos';
 var ENEMY_TYPE_B_NEG = 'b_neg';
+var ENEMY_TYPE_C = 'c';
 var ENEMY_TYPE_BOSS_1 = 'boss1';
 
 Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) {
@@ -68,6 +69,7 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
   this.bullets = bullets;
   this.fireRate = 1000;
   this.nextFire = game.time.now + this.fireRate;
+  this.fireChunk = 0;
 
   this.enObj = this.context.create(this.position.x, this.position.y, 'invader');
   this.enObj.anchor.setTo(0.5, 0.5);
@@ -89,6 +91,10 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
   } else if (this.enemyType == ENEMY_TYPE_B_NEG) {
     this.enObj.body.velocity.x = -75;
     this.enObj.body.velocity.y = 100;
+  } else if (this.enemyType == ENEMY_TYPE_C) {
+    this.enObj.body.velocity.x = 0;
+    this.enObj.body.velocity.y = 30;
+    this.hp = 12;
   } else if (this.enemyType == ENEMY_TYPE_BOSS_1) {
     console.log("Hi");
     this.hp = 30;
@@ -115,26 +121,46 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
 };
 
 Enemy.prototype.update = function () {
-  // console.log("hi");
-  if (game.time.now > this.nextFire && this.bullets.countDead() > 0 && !this.dead)
-    {
-      this.nextFire = game.time.now + this.fireRate;
+  if (game.time.now > this.nextFire && this.bullets.countDead() > 0 && !this.dead && !this.enemyType == ENEMY_TYPE_C) {
+    this.nextFire = game.time.now + this.fireRate;
 
+    var bullet = this.bullets.getFirstDead();
+
+    bullet.reset(this.enObj.body.x + 15, this.enObj.body.y + 40);
+
+    // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
+    game.physics.arcade.moveToObject(bullet,player,200);
+  }
+
+  if (this.enemyType == ENEMY_TYPE_C && !this.dead) {
+
+    if (this.enObj.position.y >= 400) {
+      this.enObj.body.velocity.y = 0;
+    }
+
+    if (game.time.now > this.nextFire && this.bullets.countDead() > 0) {
+      if (this.fireChunk < 3) {
+        this.nextFire = game.time.now + 100;
+        this.fireChunk ++;
+      } else {
+        this.nextFire = game.time.now + 3000;
+        this.fireChunk = 0;
+      }
       var bullet = this.bullets.getFirstDead();
 
       bullet.reset(this.enObj.body.x + 15, this.enObj.body.y + 40);
 
-      // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
-      game.physics.arcade.moveToObject(bullet,player,200);
+      game.physics.arcade.moveToObject(bullet,player,500);
     }
-    // console.log(game.world.getBounds().height);
-    // console.log(this.enObj.body.y );
-    if(this.enObj.body.y > game.world.getBounds().height) {
-      console.log("hi");
-      this.stopFiring();
-      livingEnemies -= 1;
-      this.enObj.kill();
-    }
+  }
+  // console.log(game.world.getBounds().height);
+  // console.log(this.enObj.body.y );
+  if(this.enObj.body.y > game.world.getBounds().height) {
+    console.log("hi");
+    this.stopFiring();
+    livingEnemies -= 1;
+    this.enObj.kill();
+  }
 };
 
 Enemy.prototype.stopFiring = function() {

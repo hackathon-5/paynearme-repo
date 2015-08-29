@@ -84,6 +84,7 @@ function Enemy() {
     x: 0,
     y: 0
   };
+  this.hp = 1;
   this.context = null;
   this.enObj = null;
   this.dead = false;
@@ -97,8 +98,7 @@ function Enemy() {
 var ENEMY_TYPE_A = 'a';
 var ENEMY_TYPE_B_POS = 'b_pos';
 var ENEMY_TYPE_B_NEG = 'b_neg';
-var ENEMY_TYPE_BOSS_1 = 'boss';
-
+var ENEMY_TYPE_BOSS_1 = 'boss1';
 
 Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) {
   this.enemyType = enemyType;
@@ -133,7 +133,9 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
     this.enObj.body.velocity.x = -75;
     this.enObj.body.velocity.y = 100;
   } else if (this.enemyType == ENEMY_TYPE_BOSS_1) {
-    this.tween = game.add.tween(this.enObj).to( { x: 200 }, 1000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+    console.log("Hi");
+    this.hp = 30;
+    this.tween = game.add.tween(this.enObj).to( { x: 550 }, 3500, Phaser.Easing.Linear.None, true, 0, 1000, true);
     
     // this.tween.onLoop.add(this.descend, this);  
   }

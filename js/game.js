@@ -303,21 +303,22 @@ function render() {
     }
 }
 
-function collisionHandler (bullet, enemy) {
+function collisionHandler (enemy, bullet) {
 
-    //  When a bullet hits an alien we kill them both
     bullet.kill();
-    this.stopFiring();
-    enemy.kill();
+    this.hp -= 1;
+    if(this.hp <= 0) {
 
-    //  Increase the score
-    score += 20;
-    scoreText.text = scoreString + score;
+        this.stopFiring();
+        enemy.kill();
 
-    //  And create an explosion :)
-    var explosion = explosions.getFirstExists(false);
-    explosion.reset(enemy.body.x, enemy.body.y);
-    explosion.play('kaboom', 30, false, true);
+        score += 20;
+        scoreText.text = scoreString + score;
+
+        var explosion = explosions.getFirstExists(false);
+        explosion.reset(enemy.body.x, enemy.body.y);
+        explosion.play('kaboom', 30, false, true);
+    }
 
     // if (enemies.countLiving() == 0)
     // {

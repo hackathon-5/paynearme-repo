@@ -19,48 +19,8 @@ WaveManager.prototype.spawnEnemey = function() {
   var enemy = new Enemy();
   enemy.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType, enemyBullets);
   enemies.push(enemy);
-  // // The enemy's bullets
-  // enemyBullets = game.add.group();
-  // enemyBullets.enableBody = true;
-  // enemyBullets.physicsBodyType = Phaser.Physics.ARCADE;
-  // enemyBullets.createMultiple(30, 'enemyBullet');
-  // enemyBullets.setAll('anchor.x', 0.5);
-  // enemyBullets.setAll('anchor.y', 1);
-  // enemyBullets.setAll('outOfBoundsKill', true);
-  // enemyBullets.setAll('checkWorldBounds', true);  
+  livingEnemies += 1;
 };
-
-// WaveManager.prototype.enemyFires = function() {
-
-//     //  Grab the first bullet we can from the pool
-//     // enemyBullet = enemyBullets.getFirstExists(false);
-
-//     // livingEnemies.length=0;
-
-//     // aliens.forEachAlive(function(alien){
-//     //   // put every living enemy in an array
-//     //   livingEnemies.push(alien);
-//     // });
-
-
-//     // if (enemyBullet && livingEnemies.length > 0)
-//     // {
-        
-//     //     var random=game.rnd.integerInRange(0,livingEnemies.length-1);
-
-//     //     // randomly select one of them
-//     //     var shooter=livingEnemies[random];
-//     //     // And fire the bullet from this enemy
-//     //     enemyBullet.reset(shooter.body.x, shooter.body.y);
-
-//     //     game.physics.arcade.moveToObject(enemyBullet,player,120);
-//     //     firingTimer = game.time.now + 2000;
-//     // }
-
-//     // enemyBullet.reset(shooter.body.x, shooter.body.y);
-
-// };
-
 
 function Wave() {
   this.spawnTimeInSeconds = null;
@@ -90,10 +50,6 @@ function Enemy() {
   this.dead = false;
   // this.tween = null;
 }
-// Enemy A: moves straight down shoots at player
-// Enemy B_POS: Moves down and right, shoots at player
-// Enemy B_NEG: Moves down and left, shoots at player
-// Enemy Boss: tween left and right, stays anchored to top
 
 var ENEMY_TYPE_A = 'a';
 var ENEMY_TYPE_B_POS = 'b_pos';

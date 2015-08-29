@@ -59,10 +59,10 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-  { spawnTimer: 1,
-    enemyType: 'boss1',
-    xPosition: 50,
-    yPosition: 200 },
+  // { spawnTimer: 1,
+  //   enemyType: 'boss1',
+  //   xPosition: 50,
+  //   yPosition: 200 },
 
 ];
 

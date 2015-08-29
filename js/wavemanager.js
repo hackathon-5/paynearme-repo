@@ -17,7 +17,8 @@ WaveManager.prototype.calculateTimers = function() {
 
 WaveManager.prototype.spawnEnemey = function() {
   var enemey = new Enemey();
-  enemey.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType);
+  enemey.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType, enemyBullets);
+
   // // The enemy's bullets
   // enemyBullets = game.add.group();
   // enemyBullets.enableBody = true;
@@ -29,35 +30,36 @@ WaveManager.prototype.spawnEnemey = function() {
   // enemyBullets.setAll('checkWorldBounds', true);  
 };
 
-WaveManager.prototype.enemyFires = function() {
+// WaveManager.prototype.enemyFires = function() {
 
-    // //  Grab the first bullet we can from the pool
-    // enemyBullet = enemyBullets.getFirstExists(false);
+//     //  Grab the first bullet we can from the pool
+//     // enemyBullet = enemyBullets.getFirstExists(false);
 
-    // livingEnemies.length=0;
+//     // livingEnemies.length=0;
 
-    // aliens.forEachAlive(function(alien){
+//     // aliens.forEachAlive(function(alien){
+//     //   // put every living enemy in an array
+//     //   livingEnemies.push(alien);
+//     // });
 
-    //     // put every living enemy in an array
-    //     livingEnemies.push(alien);
-    // });
 
-
-    // if (enemyBullet && livingEnemies.length > 0)
-    // {
+//     // if (enemyBullet && livingEnemies.length > 0)
+//     // {
         
-    //     var random=game.rnd.integerInRange(0,livingEnemies.length-1);
+//     //     var random=game.rnd.integerInRange(0,livingEnemies.length-1);
 
-    //     // randomly select one of them
-    //     var shooter=livingEnemies[random];
-    //     // And fire the bullet from this enemy
-    //     enemyBullet.reset(shooter.body.x, shooter.body.y);
+//     //     // randomly select one of them
+//     //     var shooter=livingEnemies[random];
+//     //     // And fire the bullet from this enemy
+//     //     enemyBullet.reset(shooter.body.x, shooter.body.y);
 
-    //     game.physics.arcade.moveToObject(enemyBullet,player,120);
-    //     firingTimer = game.time.now + 2000;
-    // }
+//     //     game.physics.arcade.moveToObject(enemyBullet,player,120);
+//     //     firingTimer = game.time.now + 2000;
+//     // }
 
-};
+//     // enemyBullet.reset(shooter.body.x, shooter.body.y);
+
+// };
 
 
 function Wave() {
@@ -97,13 +99,17 @@ var ENEMY_TYPE_B_NEG = 'b_neg';
 var ENEMY_TYPE_BOSS_1 = 'boss';
 
 
-Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
+Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) {
   this.enemyType = enemyType;
   this.position.x = spawnPosX;
   this.position.y = spawnPosY;
   this.context = game.add.group();
   this.context.enableBody = true;
   this.context.physicsBodyType = Phaser.Physics.ARCADE;
+
+  this.bullets = bullets;
+  this.fireRate = 1000;
+  this.nextFire = game.time.now + this.fireRate;
 
   this.enObj = this.context.create(this.position.x, this.position.y, 'invader');
   this.enObj.anchor.setTo(0.5, 0.5);
@@ -132,4 +138,41 @@ Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
   }
   // //  All this does is basically start the invaders moving. Notice we're moving the Group they belong to, rather than the invaders directly.
   // this.tween = game.add.tween(this.enObj).to( { y: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+  // this.tween.onLoop.add(this.descend, this);
+
+  //  Create our Timer
+  // timer = game.time.create(false);
+
+  // //  Set a TimerEvent to occur after 2 seconds
+  // timer.loop(2000, this.enemyFires, this);
+
+  // //  Start the timer running - this is important!
+  // //  It won't start automatically, allowing you to hook it to button events and the like.
+  // timer.start();
+  // console.log(this);
+  // game.time.events.repeat(Phaser.Timer.SECOND * 1, this.enemyFires, this);
 };
+
+Enemy.prototype.update = function () {
+  console.log("hi");
+  if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
+    {
+      this.nextFire = game.time.now + this.fireRate;
+
+      var bullet = this.bullets.getFirstDead();
+
+      bullet.reset(this.body.x, this.body.y);
+
+      // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
+      game.physics.arcade.moveToObject(bullet,player,120);
+    }
+}
+
+Enemy.prototype.enemyFires = function() {
+  //  Grab the first bullet we can from the pool
+  console.log('hi');
+  // enemyBullet = enemyBullets.getFirstExists(false);
+
+  // enemyBullet.reset(this.body.x, this.body.y);
+  // game.physics.arcade.moveToObject(enemyBullet,player,120);
+}

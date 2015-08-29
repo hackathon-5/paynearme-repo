@@ -131,18 +131,15 @@ function create() {
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     // game.input.onDown.add(gofull, this);
     waveManager = new WaveManager();
-    waveManager.addWave(1, 'invader', 100, 0);
-    waveManager.addWave(1, 'invader', 400, 0);
-    waveManager.addWave(1.5, 'invader', 100, 0);
-    waveManager.addWave(1.5, 'invader', 400, 0);
-    waveManager.addWave(2, 'invader', 100, 0);
-    waveManager.addWave(2, 'invader', 400, 0);
-    waveManager.addWave(2.5, 'invader', 100, 0);
-    waveManager.addWave(2.5, 'invader', 400, 0);
-    waveManager.addWave(3, 'invader', 100, 0);
-    waveManager.addWave(3, 'invader', 400, 0);
+    _.each(enemyWaves, function(wave) {
+        waveManager.addWave(
+            wave.spawnTimer,
+            wave.enemyType,
+            wave.xPosition,
+            wave.yPosition
+        );
+    });
     waveManager.calculateTimers();
-    console.log(waveManager);
 }
 
 function gofull() {

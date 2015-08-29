@@ -266,6 +266,16 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
+  { spawnTimer: 55,
+    enemyType: 'b_pos',
+    xPosition: 100,
+    yPosition: 0 },
+
+  { spawnTimer: 55,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
 ];
 
     // waveManager.addWave();

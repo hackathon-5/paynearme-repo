@@ -11,6 +11,7 @@ function preload() {
     game.load.image('starfield', 'assets/starfield.png');
     game.load.image('background', 'assets/background2.png');
     game.load.atlas('arcade', 'assets/virtualjoystick/skins/generic-joystick.png', 'assets/virtualjoystick/skins/generic-joystick.json');
+    game.load.image('menu', 'assets/new_game.png', 270, 180);
     // game.load.image('background', 'assets/virtualjoystick/back.png');
     // game.load.image('player', 'assets/virtualjoystick/ship.png');
     // game.load.image('bullet2', 'assets/virtualjoystick/bullet2.png');
@@ -130,6 +131,54 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     // game.input.onDown.add(gofull, this);
+
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+
+
+        /*
+        Code for the pause menu
+    */
+
+    // Create a label to use as a button
+    pause_label = game.add.text( game.world.width - 100, 2, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite( game.world.width/2, game.world.height/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiceLabel = game.add.text( game.world.width/2, game.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiceLabel.anchor.setTo(0.5, 0.5);
+    });
+
+    // Add a input listener that can help us return from being paused
+    game.input.onDown.add(unpause, self);
+
+    // And finally the method that handels the pause menu
+    function unpause(event){
+        // Only act if paused
+        if(game.paused){
+            menu.destroy();
+            choiceLabel.destroy();
+            game.paused = false;
+        }
+    };
+
     waveManager = new WaveManager();
     _.each(enemyWaves, function(wave) {
         waveManager.addWave(
@@ -141,6 +190,25 @@ function create() {
     });
     waveManager.calculateTimers();
 }
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
 
 function gofull() {
 
@@ -214,12 +282,12 @@ function update() {
         // }
 
         //  Run collision
-        // game.physics.arcade.overlap(bullets, aliens, collisionHandler, null, this);
-        // game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
+        // game.physics.arcade.overlap(bullets, enemies, collisionHandler, null, this);
+        game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
         _.each(enemies, function (enemy) {
+            game.physics.arcade.overlap(bullets, enemy.enObj, collisionHandler, null, enemy);
             enemy.update();
         });
-
     }
 
 }
@@ -235,33 +303,35 @@ function render() {
     }
 }
 
-function collisionHandler (bullet, alien) {
+function collisionHandler (enemy, bullet) {
 
-    //  When a bullet hits an alien we kill them both
     bullet.kill();
-    alien.kill();
+    this.hp -= 1;
+    if(this.hp <= 0) {
 
-    //  Increase the score
-    score += 20;
-    scoreText.text = scoreString + score;
+        this.stopFiring();
+        enemy.kill();
 
-    //  And create an explosion :)
-    var explosion = explosions.getFirstExists(false);
-    explosion.reset(alien.body.x, alien.body.y);
-    explosion.play('kaboom', 30, false, true);
-
-    if (aliens.countLiving() == 0)
-    {
-        score += 1000;
+        score += 20;
         scoreText.text = scoreString + score;
 
-        enemyBullets.callAll('kill',this);
-        stateText.text = " You Won, \n Click to restart";
-        stateText.visible = true;
-
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
+        var explosion = explosions.getFirstExists(false);
+        explosion.reset(enemy.body.x, enemy.body.y);
+        explosion.play('kaboom', 30, false, true);
     }
+
+    // if (enemies.countLiving() == 0)
+    // {
+    //     score += 1000;
+    //     scoreText.text = scoreString + score;
+
+    //     enemyBullets.callAll('kill',this);
+    //     stateText.text = " You Won, \n Click to restart";
+    //     stateText.visible = true;
+
+    //     //the "click to restart" handler
+    //     game.input.onTap.addOnce(restart,this);
+    // }
 
 }
 

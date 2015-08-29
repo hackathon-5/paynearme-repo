@@ -156,17 +156,17 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
 
 Enemy.prototype.update = function () {
   // console.log("hi");
-  // if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
-  //   {
-  //     this.nextFire = game.time.now + this.fireRate;
+  if (game.time.now > this.nextFire && this.bullets.countDead() > 0)
+    {
+      this.nextFire = game.time.now + this.fireRate;
 
-  //     var bullet = this.bullets.getFirstDead();
+      var bullet = this.bullets.getFirstDead();
 
-  //     bullet.reset(this.body.x, this.body.y);
+      bullet.reset(this.enObj.body.x, this.enObj.body.y);
 
-  //     // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
-  //     game.physics.arcade.moveToObject(bullet,player,120);
-  //   }
+      // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
+      game.physics.arcade.moveToObject(bullet,player,120);
+    }
 }
 
 Enemy.prototype.enemyFires = function() {

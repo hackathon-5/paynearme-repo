@@ -13,6 +13,7 @@ function preload() {
     game.load.image('background', 'assets/background2.png');
     game.load.atlas('arcade', 'assets/virtualjoystick/skins/generic-joystick.png', 'assets/virtualjoystick/skins/generic-joystick.json');
     game.load.image('menu', 'assets/new_game.png', 270, 180);
+    game.load.image('health', 'assets/health.png', 75, 75);
     // game.load.image('background', 'assets/virtualjoystick/back.png');
     // game.load.image('player', 'assets/virtualjoystick/ship.png');
     // game.load.image('bullet2', 'assets/virtualjoystick/bullet2.png');
@@ -43,6 +44,8 @@ var waveManager;
 var enemies = [];
 var invincibility = false;
 var shield;
+var powerups = [];
+var playerHp = 1;
 
 function create() {
     game.world.setBounds(0, 0, 600, 780)
@@ -193,9 +196,8 @@ function create() {
         );
     });
     waveManager.calculateTimers();
-
     shield = game.add.sprite(player.body.x, player.body.y, 'shield');
-    var shields = shield.animations.add('shields');
+    var shields = shield.animations.add('shields');    
 
 }
     //********************************************
@@ -243,10 +245,15 @@ function update() {
 
     //  Scroll the background
     starfield.tilePosition.y += 2;
-    
-    // shield.animations.play('shields', 30, true);
-    // shield.position.x = player.body.x - 84;
-    // shield.position.y = player.body.y - 75;
+    // console.log(playerHp);
+    if(playerHp > 1) {    
+        shield.animations.play('shields', 30, true);
+        shield.position.x = player.body.x - 84;
+        shield.position.y = player.body.y - 75;
+    } else {
+        shield.animations.stop('shields');
+    }
+    // powerup.
 
 
     if (player.alive)
@@ -299,12 +306,24 @@ function update() {
         if(!invincibility) {
             game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
         }
+        _.each(powerups, function(powerup) {
+            game.physics.arcade.overlap(powerup.sprite, player, giveHp, null, this, powerup);    
+        });
         _.each(enemies, function (enemy) {
             game.physics.arcade.overlap(bullets, enemy.enObj, collisionHandler, null, enemy);
             enemy.update();
         });
     }
 
+}
+
+function giveHp(powerup, player) {
+    powerup.kill();
+    playerHp += 1;
+    if(playerHp == 2) { 
+        shield = game.add.sprite(player.body.x, player.body.y, 'shield');
+        var shields = shield.animations.add('shields');
+    }
 }
 
 function render() {
@@ -323,6 +342,10 @@ function collisionHandler (enemy, bullet) {
     bullet.kill();
     this.hp -= 1;
     if(this.hp <= 0) {
+        powerup = new PowerUp();
+        powerup.initialize(enemy.body.x, enemy.body.y);
+        powerups.push(powerup);
+        // console.log(powerups);
 
         this.stopFiring();
         livingEnemies -= 1;
@@ -335,7 +358,6 @@ function collisionHandler (enemy, bullet) {
         explosion.reset(enemy.body.x, enemy.body.y);
         explosion.play('kaboom', 30, false, true);
     }
-    console.log(livingEnemies);
     if (livingEnemies <= 0)
     {
         score += 1000;
@@ -358,22 +380,27 @@ function noInvincible () {
 function enemyHitsPlayer (player,bullet) {
     
     bullet.kill();
-
-    live = lives.getFirstAlive();
-
-    if (live)
-    {
-        live.kill();
-        invincibility = true;
-        player.alpha = 0.5;
-        game.time.events.add(Phaser.Timer.SECOND * 3, noInvincible, this);
+    playerHp -= 1;
+    if (playerHp == 1) {
+        shield.kill();
     }
+    if (playerHp <= 0) {
+        live = lives.getFirstAlive();
 
-    //  And create an explosion :)
-    var explosion = explosions.getFirstExists(false);
-    explosion.reset(player.body.x, player.body.y);
-    explosion.play('kaboom', 30, false, true);
+        if (live)
+        {
+            live.kill();
+            invincibility = true;
+            player.alpha = 0.5;
+            game.time.events.add(Phaser.Timer.SECOND * 3, noInvincible, this);
+        }
 
+        //  And create an explosion :)
+        var explosion = explosions.getFirstExists(false);
+        explosion.reset(player.body.x, player.body.y);
+        explosion.play('kaboom', 30, false, true);
+        playerHp = 1;
+    }
     // When the player dies
     if (lives.countLiving() < 1)
     {

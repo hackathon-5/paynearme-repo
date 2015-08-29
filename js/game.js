@@ -57,7 +57,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  The scrolling starfield background
-    starfield = game.add.tileSprite(0, 0, 800, 780, 'starfield');
+    starfield = game.add.tileSprite(0, 0, 600, 780, 'starfield');
 
     //  Our bullet group
     bullets = game.add.group();
@@ -80,7 +80,7 @@ function create() {
     enemyBullets.setAll('checkWorldBounds', true);
 
     //  The hero!
-    player = game.add.sprite(400, game.world.height - 20, 'ship');
+    player = game.add.sprite(300, game.world.height - 20, 'ship');
     player.enableBody = true;
     player.anchor.setTo(0.5, 0.5);
     
@@ -96,11 +96,11 @@ function create() {
 
     //  The score
     scoreString = 'Score : ';
-    scoreText = game.add.text(10, 10, scoreString + score, { font: '34px Arial', fill: '#fff' });
+    scoreText = game.add.text(game.world.width / 2 - 100, game.stage.height - 60, scoreString + score, { font: '34px Arial', fill: '#fff' });
 
     //  Lives
     lives = game.add.group();
-    game.add.text(game.world.width - 100, 10, 'Lives : ', { font: '34px Arial', fill: '#fff' });
+    game.add.text(game.world.width / 2 - 100, game.stage.height - 110, 'Lives : ', { font: '34px Arial', fill: '#fff' });
 
     //  Text
     stateText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
@@ -109,10 +109,9 @@ function create() {
 
     for (var i = 0; i < 3; i++) 
     {
-        var ship = lives.create(game.world.width - 100 + (30 * i), 60, 'ship');
+        var ship = lives.create(game.world.width / 2 + 80 - (30 * i), game.stage.height - 88, 'ship');
         ship.anchor.setTo(0.5, 0.5);
         ship.angle = 90;
-        ship.alpha = 0.4;
     }
 
     //  An explosion pool
@@ -239,11 +238,11 @@ function update() {
 function render() {
     if (game.scale.isFullScreen)
     {
-        game.debug.text('ESC to leave fullscreen', 270, 16);
+        game.debug.text('ESC to leave fullscreen', game.world.width / 2 - 120, 16);
     }
     else
     {
-        game.debug.text('Click / Tap to go fullscreen', 270, 16);
+        game.debug.text('Click / Tap to go fullscreen', game.world.width / 2 - 120, 16);
     }
 }
 

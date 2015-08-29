@@ -319,10 +319,12 @@ function update() {
 
 function giveHp(powerup, player) {
     powerup.kill();
-    playerHp += 1;
-    if(playerHp == 2) { 
+    if(playerHp == 1) { 
         shield = game.add.sprite(player.body.x, player.body.y, 'shield');
         var shields = shield.animations.add('shields');
+    }
+    if(playerHp == 1) {
+        playerHp += 1;    
     }
 }
 
@@ -342,11 +344,13 @@ function collisionHandler (enemy, bullet) {
     bullet.kill();
     this.hp -= 1;
     if(this.hp <= 0) {
-        powerup = new PowerUp();
-        powerup.initialize(enemy.body.x, enemy.body.y);
-        powerups.push(powerup);
         // console.log(powerups);
-
+        // Random between 0 and 3 
+        if(Math.floor(Math.random() * 5) == 0){
+            powerup = new PowerUp();
+            powerup.initialize(enemy.body.x, enemy.body.y);
+            powerups.push(powerup);
+        }
         this.stopFiring();
         livingEnemies -= 1;
         enemy.kill();

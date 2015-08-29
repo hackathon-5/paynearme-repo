@@ -3,10 +3,10 @@ var game = new Phaser.Game(600, 900, Phaser.AUTO, 'space-ghost', { preload: prel
 
 function preload() {
 
-    game.load.image('bullet', 'assets/bullet.png');
+    game.load.image('bullet', 'assets/original/ectoplasm.png');
     game.load.image('enemyBullet', 'assets/enemy-bullet.png');
     game.load.spritesheet('invader', 'assets/invader32x32x4.png', 32, 32);
-    game.load.spritesheet('ship', 'assets/ghostship.png', 33, 32);
+    game.load.spritesheet('ship', 'assets/original/ghostship.png', 33, 32);
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
     game.load.spritesheet('shield', 'assets/shield.png', 192, 192, 20);
     game.load.image('starfield', 'assets/starfield.png');

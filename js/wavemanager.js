@@ -121,7 +121,7 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
 };
 
 Enemy.prototype.update = function () {
-  if (game.time.now > this.nextFire && this.bullets.countDead() > 0 && !this.dead && !this.enemyType == ENEMY_TYPE_C) {
+  if (game.time.now > this.nextFire && this.bullets.countDead() > 0 && !this.dead && this.enemyType != ENEMY_TYPE_C) {
     this.nextFire = game.time.now + this.fireRate;
 
     var bullet = this.bullets.getFirstDead();
@@ -156,7 +156,6 @@ Enemy.prototype.update = function () {
   // console.log(game.world.getBounds().height);
   // console.log(this.enObj.body.y );
   if(this.enObj.body.y > game.world.getBounds().height) {
-    console.log("hi");
     this.stopFiring();
     livingEnemies -= 1;
     this.enObj.kill();

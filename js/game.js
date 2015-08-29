@@ -11,6 +11,7 @@ function preload() {
     game.load.image('starfield', 'assets/starfield.png');
     game.load.image('background', 'assets/background2.png');
     game.load.atlas('arcade', 'assets/virtualjoystick/skins/generic-joystick.png', 'assets/virtualjoystick/skins/generic-joystick.json');
+    game.load.image('menu', 'assets/new_game.png', 270, 180);
     // game.load.image('background', 'assets/virtualjoystick/back.png');
     // game.load.image('player', 'assets/virtualjoystick/ship.png');
     // game.load.image('bullet2', 'assets/virtualjoystick/bullet2.png');
@@ -123,8 +124,73 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     // game.input.onDown.add(gofull, this);
-    
+
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+
+
+        /*
+        Code for the pause menu
+    */
+
+    // Create a label to use as a button
+    pause_label = game.add.text( game.world.width - 100, 2, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite( game.world.width/2, game.world.height/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiceLabel = game.add.text( game.world.width/2, game.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiceLabel.anchor.setTo(0.5, 0.5);
+    });
+
+    // Add a input listener that can help us return from being paused
+    game.input.onDown.add(unpause, self);
+
+    // And finally the method that handels the pause menu
+    function unpause(event){
+        // Only act if paused
+        if(game.paused){
+            menu.destroy();
+            choiceLabel.destroy();
+            game.paused = false;
+        }
+    };
 }
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
+    //********************************************
 
 function gofull() {
 

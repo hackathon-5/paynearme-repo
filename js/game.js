@@ -110,11 +110,16 @@ function create() {
     fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     // game.input.onDown.add(gofull, this);
     waveManager = new WaveManager();
-    waveManager.addWave(1, 'invader', 1, 2);
-    waveManager.addWave(2, 'invader', 1, 2);
-    waveManager.addWave(3, 'invader', 1, 2);
-    waveManager.addWave(4, 'invader', 1, 2);
-    waveManager.addWave(5, 'invader', 1, 2);
+    waveManager.addWave(1, 'invader', 100, 0);
+    waveManager.addWave(1, 'invader', 400, 0);
+    waveManager.addWave(1.5, 'invader', 100, 0);
+    waveManager.addWave(1.5, 'invader', 400, 0);
+    waveManager.addWave(2, 'invader', 100, 0);
+    waveManager.addWave(2, 'invader', 400, 0);
+    waveManager.addWave(2.5, 'invader', 100, 0);
+    waveManager.addWave(2.5, 'invader', 400, 0);
+    waveManager.addWave(3, 'invader', 100, 0);
+    waveManager.addWave(3, 'invader', 400, 0);
     waveManager.calculateTimers();
     console.log(waveManager);
 }

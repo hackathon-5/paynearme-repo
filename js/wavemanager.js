@@ -88,7 +88,7 @@ function Enemey() {
   };
   this.context = null;
   this.enObj = null;
-  this.tween = null;
+  // this.tween = null;
 }
 
 Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
@@ -104,14 +104,11 @@ Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
   // console.log(this.enObj);
   this.enObj.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
   this.enObj.play('fly');
-  this.enObj.body.moves = false;
+  this.enObj.body.moves = true;
 
+  // base this on enemy type
+  this.enObj.body.velocity.y = 200;
   // //  All this does is basically start the invaders moving. Notice we're moving the Group they belong to, rather than the invaders directly.
-  this.tween = game.add.tween(this.enObj).to( { x: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
-  this.tween.onLoop.add(this.descend, this);
-};
-
-Enemey.prototype.descend = function() {
-  console.log(this);
-  this.y += 10;
+  // this.tween = game.add.tween(this.enObj).to( { y: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+  // this.tween.onLoop.add(this.descend, this);
 };

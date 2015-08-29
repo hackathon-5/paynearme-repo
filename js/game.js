@@ -166,8 +166,8 @@ function create() {
         game.paused = true;
 
         // Then add the menu
-        menu = game.add.sprite( game.world.width/2, game.world.height/2, 'menu');
-        menu.anchor.setTo(0.5, 0.5);
+        // menu = game.add.sprite( game.world.width/2, game.world.height/2, 'menu');
+        // menu.anchor.setTo(0.5, 0.5);
 
         // And a label to illustrate which menu item was chosen. (This is not necessary)
         choiceLabel = game.add.text( game.world.width/2, game.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
@@ -181,7 +181,7 @@ function create() {
     function unpause(event){
         // Only act if paused
         if(game.paused){
-            menu.destroy();
+            // menu.destroy();
             choiceLabel.destroy();
             game.paused = false;
         }
@@ -371,18 +371,18 @@ function collisionHandler (enemy, bullet) {
         explosion.reset(enemy.body.x, enemy.body.y);
         explosion.play('kaboom', 30, false, true);
     }
-    if (livingEnemies <= 0)
-    {
-        score += 1000;
-        scoreText.text = scoreString + score;
+    // if (livingEnemies <= 0)
+    // {
+    //     score += 1000;
+    //     scoreText.text = scoreString + score;
 
-        enemyBullets.callAll('kill',this);
-        stateText.text = " You Won, \n Refresh to \n restart";
-        stateText.visible = true;
+    //     enemyBullets.callAll('kill',this);
+    //     stateText.text = " You Won, \n Refresh to \n restart";
+    //     stateText.visible = true;
 
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
-    }
+    //     //the "click to restart" handler
+    //     game.input.onTap.addOnce(restart,this);
+    // }
 
 }
 function noInvincible () {

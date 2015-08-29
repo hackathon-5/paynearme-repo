@@ -1,5 +1,5 @@
 var enemyWaves = [
-  // Wave 1 - 3 left row ##################################
+  // // Wave 1 - 3 left row ##################################
   { spawnTimer: 1,
     enemyType: 'a',
     xPosition: 50,
@@ -550,6 +550,305 @@ var enemyWaves = [
     enemyType: 'boss1',
     xPosition: 300,
     yPosition: 0 },
+
+    // the adam wave.
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 300,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_pos',
+    xPosition: 400,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_pos',
+    xPosition: 600,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 375,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_pos',
+    xPosition: 475,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 575,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_pos',
+    xPosition: 675,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 325,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_pos',
+    xPosition: 425,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 525,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_pos',
+    xPosition: 625,
+    yPosition: 0 },
+
+    { spawnTimer: 88,
+    enemyType: 'b_neg',
+    xPosition: 550,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 300,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_pos',
+    xPosition: 400,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_pos',
+    xPosition: 600,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 375,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_pos',
+    xPosition: 475,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 575,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_pos',
+    xPosition: 675,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 325,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_pos',
+    xPosition: 425,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 525,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_pos',
+    xPosition: 625,
+    yPosition: 0 },
+
+    { spawnTimer: 89,
+    enemyType: 'b_neg',
+    xPosition: 550,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 300,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_pos',
+    xPosition: 400,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_pos',
+    xPosition: 600,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 375,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_pos',
+    xPosition: 475,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 575,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_pos',
+    xPosition: 675,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 325,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_pos',
+    xPosition: 425,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 525,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_pos',
+    xPosition: 625,
+    yPosition: 0 },
+
+    { spawnTimer: 90,
+    enemyType: 'b_neg',
+    xPosition: 550,
+    yPosition: 0 },
+
+    ///////////////////////////////////////////////////
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 325,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_pos',
+    xPosition: 425,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 525,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_pos',
+    xPosition: 625,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 345,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_pos',
+    xPosition: 445,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 545,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_pos',
+    xPosition: 645,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 325,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_pos',
+    xPosition: 425,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 525,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_pos',
+    xPosition: 625,
+    yPosition: 0 },
+
+    { spawnTimer: 91,
+    enemyType: 'b_neg',
+    xPosition: 550,
+    yPosition: 0 },
+
+    { spawnTimer: 92,
+    enemyType: 'b_neg',
+    xPosition: 300,
+    yPosition: 0 },
+
+    { spawnTimer: 92,
+    enemyType: 'b_pos',
+    xPosition: 400,
+    yPosition: 0 },
+
+    { spawnTimer: 92,
+    enemyType: 'b_neg',
+    xPosition: 500,
+    yPosition: 0 },
+
+    { spawnTimer: 92,
+    enemyType: 'b_pos',
+    xPosition: 600,
+    yPosition: 0 },
+
+    { spawnTimer: 92,
+    enemyType: 'b_neg',
+    xPosition: 375,
+    yPosition: 0 },
+
+    { spawnTimer: 93,
+      enemytype: 'boss1',
+      xPosition: 300,
+      yPosition: 0 },
+
+    { spawnTimer: 93,
+      enemytype: 'boss1',
+      xPosition: 600,
+      yPosition: 0 },
 
 ];
 

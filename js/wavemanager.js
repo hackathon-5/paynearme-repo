@@ -11,6 +11,7 @@ WaveManager.prototype.addWave = function(spawnTimeInSeconds, enemyType, spawnPos
 WaveManager.prototype.calculateTimers = function() {
   context = this;
   _.each(this.waves, function(wave) {
+    livingEnemies += 1;
     game.time.events.add(Phaser.Timer.SECOND * wave.spawnTimeInSeconds, context.spawnEnemey, wave);
   });
 };
@@ -19,7 +20,6 @@ WaveManager.prototype.spawnEnemey = function() {
   var enemy = new Enemy();
   enemy.initialize(this.spawnPos.x, this.spawnPos.y, this.enemyType, enemyBullets);
   enemies.push(enemy);
-  livingEnemies += 1;
 };
 
 function Wave() {
@@ -63,7 +63,8 @@ Enemy.prototype.initialize = function(spawnPosX, spawnPosY, enemyType, bullets) 
   this.context = game.add.group();
   this.context.enableBody = true;
   this.context.physicsBodyType = Phaser.Physics.ARCADE;
-
+  this.context.setAll('outOfBoundsKill', true);
+  this.context.setAll('checkWorldBounds', true);
   this.bullets = bullets;
   this.fireRate = 1000;
   this.nextFire = game.time.now + this.fireRate;
@@ -125,6 +126,14 @@ Enemy.prototype.update = function () {
 
       // bullet.rotation = this.game.physics.arcade.moveToObject(bullet, this.player, 500);
       game.physics.arcade.moveToObject(bullet,player,200);
+    }
+    // console.log(game.world.getBounds().height);
+    // console.log(this.enObj.body.y );
+    if(this.enObj.body.y > game.world.getBounds().height) {
+      console.log("hi");
+      this.stopFiring();
+      livingEnemies -= 1;
+      this.enObj.kill();
     }
 };
 

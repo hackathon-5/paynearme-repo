@@ -140,6 +140,11 @@ var enemyWaves = [
     xPosition: 100,
     yPosition: 0 },
 
+  { spawnTimer: 27,
+    enemyType: 'c',
+    xPosition: 300,
+    yPosition: 0 },
+
   { spawnTimer: 29,
     enemyType: 'a',
     xPosition: 500,
@@ -483,6 +488,11 @@ var enemyWaves = [
   { spawnTimer: 74,
     enemyType: 'a',
     xPosition: 400,
+    yPosition: 0 },
+
+  { spawnTimer: 74,
+    enemyType: 'c',
+    xPosition: 300,
     yPosition: 0 },
 
   { spawnTimer: 75,

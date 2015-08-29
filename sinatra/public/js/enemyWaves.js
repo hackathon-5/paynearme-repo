@@ -564,11 +564,6 @@ var enemyWaves = [
     yPosition: 0 },
 
     { spawnTimer: 88,
-    enemyType: 'b_neg',
-    xPosition: 500,
-    yPosition: 0 },
-
-    { spawnTimer: 88,
     enemyType: 'b_pos',
     xPosition: 600,
     yPosition: 0 },
@@ -606,16 +601,6 @@ var enemyWaves = [
     { spawnTimer: 88,
     enemyType: 'b_neg',
     xPosition: 525,
-    yPosition: 0 },
-
-    { spawnTimer: 88,
-    enemyType: 'b_pos',
-    xPosition: 625,
-    yPosition: 0 },
-
-    { spawnTimer: 88,
-    enemyType: 'b_neg',
-    xPosition: 550,
     yPosition: 0 },
 
     { spawnTimer: 89,
@@ -644,11 +629,6 @@ var enemyWaves = [
     yPosition: 0 },
 
     { spawnTimer: 89,
-    enemyType: 'b_pos',
-    xPosition: 475,
-    yPosition: 0 },
-
-    { spawnTimer: 89,
     enemyType: 'b_neg',
     xPosition: 575,
     yPosition: 0 },
@@ -666,16 +646,6 @@ var enemyWaves = [
     { spawnTimer: 89,
     enemyType: 'b_pos',
     xPosition: 425,
-    yPosition: 0 },
-
-    { spawnTimer: 89,
-    enemyType: 'b_neg',
-    xPosition: 525,
-    yPosition: 0 },
-
-    { spawnTimer: 89,
-    enemyType: 'b_pos',
-    xPosition: 625,
     yPosition: 0 },
 
     { spawnTimer: 89,
@@ -729,23 +699,8 @@ var enemyWaves = [
     yPosition: 0 },
 
     { spawnTimer: 90,
-    enemyType: 'b_pos',
-    xPosition: 425,
-    yPosition: 0 },
-
-    { spawnTimer: 90,
     enemyType: 'b_neg',
     xPosition: 525,
-    yPosition: 0 },
-
-    { spawnTimer: 90,
-    enemyType: 'b_pos',
-    xPosition: 625,
-    yPosition: 0 },
-
-    { spawnTimer: 90,
-    enemyType: 'b_neg',
-    xPosition: 550,
     yPosition: 0 },
 
     ///////////////////////////////////////////////////
@@ -781,11 +736,6 @@ var enemyWaves = [
     yPosition: 0 },
 
     { spawnTimer: 91,
-    enemyType: 'b_neg',
-    xPosition: 545,
-    yPosition: 0 },
-
-    { spawnTimer: 91,
     enemyType: 'b_pos',
     xPosition: 645,
     yPosition: 0 },
@@ -805,16 +755,6 @@ var enemyWaves = [
     xPosition: 525,
     yPosition: 0 },
 
-    { spawnTimer: 91,
-    enemyType: 'b_pos',
-    xPosition: 625,
-    yPosition: 0 },
-
-    { spawnTimer: 91,
-    enemyType: 'b_neg',
-    xPosition: 550,
-    yPosition: 0 },
-
     { spawnTimer: 92,
     enemyType: 'b_neg',
     xPosition: 300,
@@ -830,16 +770,6 @@ var enemyWaves = [
     xPosition: 500,
     yPosition: 0 },
 
-    { spawnTimer: 92,
-    enemyType: 'b_pos',
-    xPosition: 600,
-    yPosition: 0 },
-
-    { spawnTimer: 92,
-    enemyType: 'b_neg',
-    xPosition: 375,
-    yPosition: 0 },
-
     { spawnTimer: 93,
       enemytype: 'boss1',
       xPosition: 300,
@@ -847,7 +777,7 @@ var enemyWaves = [
 
     { spawnTimer: 93,
       enemytype: 'boss1',
-      xPosition: 600,
+      xPosition: 500,
       yPosition: 0 },
 
 ];

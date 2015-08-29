@@ -1,5 +1,8 @@
+var POWERUP_TYPE_HEALTH = 'health';
+var POWERUP_TYPE_LAZER_UPGRADE_1 = 'star';
 function PowerUp() {
   // this
+  this.powerUpType = 'health';
   this.sprite = null;
   this.position = {
     x: 0,
@@ -7,11 +10,12 @@ function PowerUp() {
   };
 }
 
-PowerUp.prototype.initialize = function(spawnPosX, spawnPosY) {
+PowerUp.prototype.initialize = function(spawnPosX, spawnPosY, powerUpType) {
   // console.log("hi");
   this.position.x = spawnPosX;
   this.position.y = spawnPosY;
-  this.sprite = game.add.sprite(spawnPosX, spawnPosY, 'health');
+  this.powerUpType = powerUpType;
+  this.sprite = game.add.sprite(spawnPosX, spawnPosY, powerUpType);
   this.sprite.enableBody = true;
   this.sprite.anchor.setTo(0.5, 0.5);
   game.physics.enable(this.sprite, Phaser.Physics.ARCADE);

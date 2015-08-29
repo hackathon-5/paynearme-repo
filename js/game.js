@@ -13,7 +13,8 @@ function preload() {
     game.load.image('background', 'assets/background2.png');
     game.load.atlas('arcade', 'assets/virtualjoystick/skins/generic-joystick.png', 'assets/virtualjoystick/skins/generic-joystick.json');
     game.load.image('menu', 'assets/new_game.png', 270, 180);
-    game.load.image('health', 'assets/health.png', 75, 75);
+    game.load.image(POWERUP_TYPE_HEALTH, 'assets/' + POWERUP_TYPE_HEALTH + '.png', 75, 75);
+    game.load.image(POWERUP_TYPE_LAZER_UPGRADE_1, 'assets/'+ POWERUP_TYPE_LAZER_UPGRADE_1 + '.png', 24, 22);
     // game.load.image('background', 'assets/virtualjoystick/back.png');
     // game.load.image('player', 'assets/virtualjoystick/ship.png');
     // game.load.image('bullet2', 'assets/virtualjoystick/bullet2.png');
@@ -46,7 +47,7 @@ var invincibility = false;
 var shield;
 var powerups = [];
 var playerHp = 1;
-
+var lazerUpgrade = null;
 function create() {
     game.world.setBounds(0, 0, 600, 780)
     pad = game.plugins.add(Phaser.VirtualJoystick);
@@ -307,7 +308,7 @@ function update() {
             game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);
         }
         _.each(powerups, function(powerup) {
-            game.physics.arcade.overlap(powerup.sprite, player, giveHp, null, this, powerup);    
+            game.physics.arcade.overlap(powerup.sprite, player, doPowerUp, null, powerup);    
         });
         _.each(enemies, function (enemy) {
             game.physics.arcade.overlap(bullets, enemy.enObj, collisionHandler, null, enemy);
@@ -317,14 +318,19 @@ function update() {
 
 }
 
-function giveHp(powerup, player) {
+function doPowerUp(powerup, player) {
+    console.log(this);
     powerup.kill();
-    if(playerHp == 1) { 
-        shield = game.add.sprite(player.body.x, player.body.y, 'shield');
-        var shields = shield.animations.add('shields');
-    }
-    if(playerHp == 1) {
-        playerHp += 1;    
+    if(this.powerUpType == POWERUP_TYPE_HEALTH) {
+        if(playerHp == 1) { 
+            shield = game.add.sprite(player.body.x, player.body.y, 'shield');
+            var shields = shield.animations.add('shields');
+        }
+        if(playerHp == 1) {
+            playerHp += 1;    
+        }
+    } else if(this.powerUpType == POWERUP_TYPE_LAZER_UPGRADE_1) {
+        lazerUpgrade = POWERUP_TYPE_LAZER_UPGRADE_1;
     }
 }
 
@@ -344,9 +350,14 @@ function collisionHandler (enemy, bullet) {
     bullet.kill();
     this.hp -= 1;
     if(this.hp <= 0) {
-        if(Math.floor(Math.random() * 10) == 0){
+        if(Math.floor(Math.random() * 20) == 0){
             powerup = new PowerUp();
-            powerup.initialize(enemy.body.x, enemy.body.y);
+            powerup.initialize(enemy.body.x, enemy.body.y, POWERUP_TYPE_HEALTH);
+            powerups.push(powerup);
+        }
+        else if(Math.floor(Math.random() * 10) == 0){
+            powerup = new PowerUp();
+            powerup.initialize(enemy.body.x, enemy.body.y, POWERUP_TYPE_LAZER_UPGRADE_1);
             powerups.push(powerup);
         }
         this.stopFiring();
@@ -387,6 +398,8 @@ function enemyHitsPlayer (player,bullet) {
         shield.kill();
     }
     if (playerHp <= 0) {
+        lazerUpgrade = null;
+
         live = lives.getFirstAlive();
 
         if (live)
@@ -423,13 +436,23 @@ function fireBullet () {
     //  To avoid them being allowed to fire too fast we set a time limit
     if (game.time.now > bulletTime)
     {
-        //  Grab the first bullet we can from the pool
         bullet = bullets.getFirstExists(false);
 
         if (bullet)
         {
-            //  And fire it
             bullet.reset(player.x, player.y + 8);
+            bullet.body.velocity.y = -400;
+            bulletTime = game.time.now + 200;
+        }
+
+        if(lazerUpgrade == POWERUP_TYPE_LAZER_UPGRADE_1) {
+            bullet = bullets.getFirstExists(false);
+            bullet.reset(player.x - 15, player.y + 8);
+            bullet.body.velocity.y = -400;
+            bulletTime = game.time.now + 200;
+
+            bullet = bullets.getFirstExists(false);
+            bullet.reset(player.x + 15, player.y + 8);
             bullet.body.velocity.y = -400;
             bulletTime = game.time.now + 200;
         }

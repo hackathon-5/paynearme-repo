@@ -94,7 +94,7 @@ function Enemey() {
 var ENEMY_TYPE_A = 'a';
 var ENEMY_TYPE_B_POS = 'b_pos';
 var ENEMY_TYPE_B_NEG = 'b_neg';
-var ENEMY_TYPE_BOSS = 'boss';
+var ENEMY_TYPE_BOSS_1 = 'boss';
 
 
 Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
@@ -110,7 +110,7 @@ Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
   // console.log(this.enObj);
   this.enObj.animations.add('fly', [ 0, 1, 2, 3 ], 20, true);
   this.enObj.play('fly');
-  if (this.enemyType != ENEMY_TYPE_BOSS) {
+  if (this.enemyType != ENEMY_TYPE_BOSS_1) {
     this.enObj.body.moves = true;
   } else {
     this.enObj.body.moves = true;
@@ -125,10 +125,11 @@ Enemey.prototype.initialize = function(spawnPosX, spawnPosY, enemyType) {
   } else if (this.enemyType == ENEMY_TYPE_B_NEG) {
     this.enObj.body.velocity.x = -75;
     this.enObj.body.velocity.y = 100;
-  } else if (this.enemyType == ENEMY_TYPE_BOSS) {
+  } else if (this.enemyType == ENEMY_TYPE_BOSS_1) {
     this.tween = game.add.tween(this.enObj).to( { x: 200 }, 1000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+    
+    // this.tween.onLoop.add(this.descend, this);  
   }
   // //  All this does is basically start the invaders moving. Notice we're moving the Group they belong to, rather than the invaders directly.
   // this.tween = game.add.tween(this.enObj).to( { y: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
-  // this.tween.onLoop.add(this.descend, this);
 };

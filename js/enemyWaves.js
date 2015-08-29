@@ -58,6 +58,12 @@ var enemyWaves = [
     enemyType: 'a',
     xPosition: 500,
     yPosition: 0 },
+
+  { spawnTimer: 1,
+    enemyType: 'boss1',
+    xPosition: 150,
+    yPosition: 0 },
+
 ];
 
     // waveManager.addWave();

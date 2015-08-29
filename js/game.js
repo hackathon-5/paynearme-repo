@@ -344,9 +344,7 @@ function collisionHandler (enemy, bullet) {
     bullet.kill();
     this.hp -= 1;
     if(this.hp <= 0) {
-        // console.log(powerups);
-        // Random between 0 and 3 
-        if(Math.floor(Math.random() * 5) == 0){
+        if(Math.floor(Math.random() * 10) == 0){
             powerup = new PowerUp();
             powerup.initialize(enemy.body.x, enemy.body.y);
             powerups.push(powerup);

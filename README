@@ -1,3 +1,5 @@
-npm install serve -g
-
+$ npm install
+$ npm install serve -g
 $ serve
+
+visit localhost:3000

@@ -6,7 +6,7 @@ function preload() {
     game.load.image('bullet', 'assets/bullet.png');
     game.load.image('enemyBullet', 'assets/enemy-bullet.png');
     game.load.spritesheet('invader', 'assets/invader32x32x4.png', 32, 32);
-    game.load.image('ship', 'assets/player.png');
+    game.load.spritesheet('ship', 'assets/ghostship.png', 33, 32);
     game.load.spritesheet('kaboom', 'assets/explode.png', 128, 128);
     game.load.spritesheet('shield', 'assets/shield.png', 192, 192, 20);
     game.load.image('starfield', 'assets/starfield.png');
@@ -80,6 +80,9 @@ function create() {
 
     //  The hero!
     player = game.add.sprite(300, game.world.height - 20, 'ship');
+    var shields = player.animations.add('animate');
+    player.animations.play('animate', 30, true);
+    noInvincible();
 
     player.enableBody = true;
     player.anchor.setTo(0.5, 0.5);
@@ -371,23 +374,23 @@ function collisionHandler (enemy, bullet) {
         explosion.reset(enemy.body.x, enemy.body.y);
         explosion.play('kaboom', 30, false, true);
     }
-    if (livingEnemies <= 0)
-    {
-        score += 1000;
-        scoreText.text = scoreString + score;
+    // if (livingEnemies <= 0)
+    // {
+    //     score += 1000;
+    //     scoreText.text = scoreString + score;
 
-        enemyBullets.callAll('kill',this);
-        stateText.text = " You Won, \n Refresh to \n restart";
-        stateText.visible = true;
+    //     enemyBullets.callAll('kill',this);
+    //     stateText.text = " You Won, \n Refresh to \n restart";
+    //     stateText.visible = true;
 
-        //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
-    }
+    //     //the "click to restart" handler
+    //     game.input.onTap.addOnce(restart,this);
+    // }
 
 }
 function noInvincible () {
     invincibility = false;
-    player.alpha = 1;
+    player.alpha = .75;
 }
 
 function enemyHitsPlayer (player,bullet) {
